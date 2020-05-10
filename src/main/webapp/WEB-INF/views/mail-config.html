@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Setting</h1>
+<span th:if="${msg}"><strong th:text="${msg}"></strong> </span>
+<form method="post" th:action="@{/mail-config-save}" th:object="${mailConfig}">
+    <table>
+        <tr>
+            <td><strong>Languages</strong></td>
+            <td>
+                <select th:field="*{languages}">
+                    <option value="English">English</option>
+                    <option value="Vietnamese">Vietnamese</option>
+                    <option value="Japanese">Japanese</option>
+                    <option value="Chinese">Chinese</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Page size</strong></td>
+            <td>Show
+            <select th:field="*{pageSize}">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+                &nbsp; emails per page
+            </td>
+        </tr>
+        <tr>
+            <td><strong>Spam filter</strong></td>
+            <td>
+                <input type="checkbox" th:field="*{spamFilter}"> Enable spams filter
+            </td>
+        </tr>
+        <tr>
+            <td>Signature</td>
+            <td>
+                <textarea th:field="*{signature}" th:value="${mailConfig.signature}">
+                </textarea>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Update">
+                <button value="Cancel" th:action="@{/mail-config}">Cancel</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
